@@ -1,7 +1,9 @@
-import type { ComponentType, LazyExoticComponent } from 'react';
+import { lazy, type ComponentType, type LazyExoticComponent } from 'react';
 
 /**
  * Tool id → lazily loaded View. Kept apart from registry.ts so the registry
  * stays React-free. Each View is code-split into its own chunk.
  */
-export const toolViews: Record<string, LazyExoticComponent<ComponentType>> = {};
+export const toolViews: Record<string, LazyExoticComponent<ComponentType>> = {
+  laundry: lazy(() => import('./laundry/View')),
+};
