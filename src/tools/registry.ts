@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { electricityMeta } from './electricity/meta';
 import { laundryMeta } from './laundry/meta';
 import type { ToolMeta } from './types';
 
@@ -8,7 +9,7 @@ import type { ToolMeta } from './types';
  * To add a tool: create src/tools/<id>/ and append its meta here and its View
  * in ./views.ts.
  */
-export const tools: readonly ToolMeta[] = [laundryMeta];
+export const tools: readonly ToolMeta[] = [laundryMeta, electricityMeta];
 
 export function getTool(id: string): ToolMeta | undefined {
   return tools.find((t) => t.id === id);

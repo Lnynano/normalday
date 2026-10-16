@@ -6,4 +6,5 @@ import { lazy, type ComponentType, type LazyExoticComponent } from 'react';
  */
 export const toolViews: Record<string, LazyExoticComponent<ComponentType>> = {
   laundry: lazy(() => import('./laundry/View')),
+  electricity: lazy(() => import('./electricity/View')),
 };
