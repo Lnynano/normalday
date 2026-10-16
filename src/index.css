@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+@import '@fontsource/ibm-plex-sans-thai/400.css';
+@import '@fontsource/ibm-plex-sans-thai/500.css';
+@import '@fontsource/ibm-plex-sans-thai/600.css';
+@import '@fontsource/ibm-plex-sans-thai/700.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens. Use these utilities (bg-surface, text-ink, border-line, ...)
+ * instead of raw colors so light/dark stay consistent.
+ * Dark values are overridden on .dark below.
+ */
+@theme {
+  --font-sans: 'IBM Plex Sans Thai', ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: #edf1ef;
+  --color-surface: #ffffff;
+  --color-surface-2: #e2e9e6;
+  --color-line: #dce3e1;
+  --color-ink: #1c2b2c;
+  --color-ink-soft: #5c6e6c;
+
+  --color-brand: #2f7e77;
+  --color-brand-strong: #20605b;
+  --color-brand-soft: #d5e8e5;
+  --color-accent: #d98e2b;
+  --color-danger: #c1502e;
+  --color-coin: #b5871f;
+
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  .dark {
+    --color-bg: #111a1b;
+    --color-surface: #1a2526;
+    --color-surface-2: #243233;
+    --color-line: #2c3b3c;
+    --color-ink: #e9efed;
+    --color-ink-soft: #9db0ad;
+
+    --color-brand: #4fb3a9;
+    --color-brand-strong: #7ccdc4;
+    --color-brand-soft: #1f3b39;
+    --color-accent: #e8a64f;
+    --color-danger: #e57a5a;
+    --color-coin: #e8b94a;
+  }
+
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
