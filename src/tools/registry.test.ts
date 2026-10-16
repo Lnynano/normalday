@@ -30,6 +30,11 @@ describe('registry', () => {
     }
   });
 
+  it('leaves aiVisible:false tools out of the tool definitions', () => {
+    const names = toToolDefinitions().map((d) => d.name);
+    for (const t of tools) expect(names.includes(t.id)).toBe(t.aiVisible !== false);
+  });
+
   // Keeps schemas honest: every example must validate in and out.
   for (const t of tools) {
     for (const ex of t.examples) {

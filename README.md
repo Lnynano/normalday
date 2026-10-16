@@ -11,6 +11,7 @@ Little everyday tools for life in Thailand: calculators and quick references in 
 | 🧺 Coin Laundry | ซักผ้าหยอดเหรียญ | Clothing counts → machine size (9.5 / 14 / 18 kg), water temperature, price |
 | ⚡ Electric Bill | ค่าไฟ | kWh → bill (progressive tiers + service + Ft + VAT, MEA/PEA), or appliance W × h × days → kWh and ฿ |
 | 🧾 Bill Split | หารบิล | Total or items (optionally shared by some people), service %, VAT 7%, per-person rounding, copy summary |
+| 🪪 My Details | ข้อมูลของฉัน | Your name, address, phone etc. saved on the device; tap to copy, mask sensitive ones, backup/restore |
 
 Stack: Vite · React · TypeScript (strict) · Tailwind CSS 4 · Zod · vite-plugin-pwa · Vitest · GitHub Pages.
 
@@ -60,6 +61,12 @@ Every tool is a pure function with a Zod schema. A future AI assistant can read
 tool and run `callTool(id, input)`. The input is validated before it runs. The
 registry test runs every `examples` entry and checks the output against
 `outputSchema`, so the schemas stay accurate.
+
+A tool can set `aiVisible: false` in its meta to stay out of `toToolDefinitions()` (My Details does:
+its real data only exists in the user's browser).
+
+**Privacy:** this repo and the site are public. Never commit personal data. My Details ships with
+headings only (`src/data/details.ts`); the values are typed in by the user and kept in that browser's `localStorage`.
 
 Last inputs are saved per tool in `localStorage` under `normalday:v1:<id>`.
 Saved data is validated on load, so a changed shape just falls back to the defaults.

@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { billSplitMeta } from './bill-split/meta';
 import { electricityMeta } from './electricity/meta';
 import { laundryMeta } from './laundry/meta';
+import { myDetailsMeta } from './my-details/meta';
 import type { ToolMeta } from './types';
 
 /**
@@ -10,7 +11,7 @@ import type { ToolMeta } from './types';
  * To add a tool: create src/tools/<id>/ and append its meta here and its View
  * in ./views.ts.
  */
-export const tools: readonly ToolMeta[] = [laundryMeta, electricityMeta, billSplitMeta];
+export const tools: readonly ToolMeta[] = [laundryMeta, electricityMeta, billSplitMeta, myDetailsMeta];
 
 export function getTool(id: string): ToolMeta | undefined {
   return tools.find((t) => t.id === id);
@@ -25,7 +26,7 @@ export function callTool(id: string, input: unknown): unknown {
 
 /** JSON Schema definitions in the common LLM tool-calling shape. */
 export function toToolDefinitions() {
-  return tools.map((t) => ({
+  return tools.filter((t) => t.aiVisible !== false).map((t) => ({
     name: t.id,
     description: `${t.name.en} (${t.name.th}): ${t.description.en}`,
     input_schema: z.toJSONSchema(t.inputSchema, { io: 'input' }),

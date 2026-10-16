@@ -26,6 +26,11 @@ export interface ToolMeta<I extends z.ZodType = z.ZodType, O extends z.ZodType =
   outputSchema: O;
   run(input: z.output<I>): z.output<O>;
   examples: { description: string; input: z.input<I> }[];
+  /**
+   * false = leave out of the AI tool list. For tools whose real data only lives
+   * on the user's device, so the AI has nothing useful to call. Default true.
+   */
+  aiVisible?: boolean;
 }
 
 /** Identity helper that keeps `run` and `examples` typed against the schemas. */
