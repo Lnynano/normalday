@@ -3,8 +3,10 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// Must match the GitHub repo name: https://<user>.github.io/<repo>/
-const BASE = '/normalday/';
+// Served from the root of the custom domain https://tools.lnynano.com/
+// (public/CNAME). On a plain https://<user>.github.io/<repo>/ URL this would
+// have to be '/<repo>/' instead.
+const BASE = '/';
 
 export default defineConfig({
   base: BASE,

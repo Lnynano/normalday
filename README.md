@@ -4,7 +4,7 @@
 
 Little everyday tools for life in Thailand: calculators and quick references in one installable, offline-capable web app.
 
-**Live:** https://lnynano.github.io/normalday/
+**Live:** https://tools.lnynano.com/
 
 | Tool | ไทย | What it does |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ Stack: Vite · React · TypeScript (strict) · Tailwind CSS 4 · Zod · vite-plu
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173/normalday/
+npm run dev        # http://localhost:5173/
 npm test           # unit tests (Vitest)
 npm run lint       # ESLint
 npm run build      # type-check + production build into dist/
@@ -117,14 +117,18 @@ Saved data is validated on load, so a changed shape just falls back to the defau
 
 ## เปิดใช้ GitHub Pages / Enable GitHub Pages
 
-1. Push to GitHub. The repo name must match `BASE` in `vite.config.ts` (`/normalday/`).
+1. Push to GitHub. `public/CNAME` holds the custom domain (`tools.lnynano.com`) and `BASE` in `vite.config.ts` is `/`.
 2. GitHub repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Push to `main` (or run the workflow from the **Actions** tab). `.github/workflows/deploy.yml` lints, tests, builds and deploys.
-4. เปิด / Open `https://<username>.github.io/normalday/`. บนมือถือกด "เพิ่มไปยังหน้าจอโฮม" / On a phone, use "Add to Home Screen" to install it.
+3. **DNS** (at the registrar for `lnynano.com`): add a `CNAME` record, name `tools`, value `lnynano.github.io`. No trailing path, no `https://`.
+4. GitHub repo → **Settings → Pages → Custom domain**: enter `tools.lnynano.com`, save, wait for the DNS check, then tick **Enforce HTTPS**. (With a GitHub Actions deploy the `CNAME` file alone does not set the domain; this setting does.)
+5. Push to `main` (or run the workflow from the **Actions** tab). `.github/workflows/deploy.yml` lints, tests, builds and deploys.
+6. เปิด / Open `https://tools.lnynano.com/`. บนมือถือกด "เพิ่มไปยังหน้าจอโฮม" / On a phone, use "Add to Home Screen" to install it.
 
 ใช้ HashRouter (`#/t/laundry`) จึงไม่เจอ 404 บน Pages. Routes use HashRouter (`#/t/laundry`), so deep links don't 404 on Pages.
 
-ถ้าเปลี่ยนชื่อ repo ให้แก้ `BASE` ใน `vite.config.ts`. If you rename the repo, update `BASE` in `vite.config.ts`.
+**ย้ายโดเมน / Moving domains:** `localStorage` belongs to one origin. Saved inputs and My Details do **not** carry over from `lnynano.github.io` to a new domain. Use **Copy backup** in My Details first and **Restore** on the new site. An app installed from the old address must be installed again.
+
+**ไม่ใช้โดเมนเอง / Without a custom domain:** delete `public/CNAME` and set `BASE` to `'/<repo>/'` (e.g. `'/normalday/'`).
 
 ---
 
